@@ -157,7 +157,23 @@ Label the axes with units where appropriate.
 
 Add a title describing the relationship (e.g. as SLA increases, total mass ______). 
 
+```{r}
+#| label: scatterplot
 
+# base layer: ggplot
+ggplot(data = drought_exp_clean, 
+       # x-axis: specific leaf area 
+       # y-axis: total mass of leaf 
+       mapping = aes(x = sla, 
+                     y = total_g)) +
+  # adding points to plot
+geom_point() +
+# labeling x- and y-axis and title 
+labs(x = "Specific leaf Area (cm\U00B2 / g)",
+     y = "total leaf mass in g",
+     title = "As SLA Increases, Total g Increases")
+
+```
 
 
 
@@ -169,6 +185,29 @@ Label the axes with units where appropriate.
 
 Add a title describing the differences in (mean or median) plant mass between water treatments.
 
+```{r}
+#| label: ggplot
+
+# base laser: ggplot
+ggplot(data = drought_exp_clean, 
+       # x-axis: treatment 
+       # y-axis = treatment type
+       # coloring by treatment 
+       mapping = aes(x = water_treatment, 
+                     y = total_g, 
+                     color = water_treatment)) +
+  # representing individual points
+  geom_jitter(height = 0, 
+              width = 0.1) + 
+  scale_color_manual(values = c( 
+    "Drought stressed" = ds_col,
+    "Well Watered" = ww_col
+    )) +
+labs(x = "water treatment type", 
+     y = "total leaf mass in g", 
+     title = "Plants well watered have higher mass than drought-stressed")
+
+```
 
 
 
@@ -186,6 +225,33 @@ Add a title describing the differences in (mean or median) plant mass between sp
 Bonus: order the x-axis by decreasing mean plant mass.
 
 
+```{r}
+#| label: jitter plot
+
+ggplot(data = drought_exp_clean, 
+       mapping = aes(x = species_name, 
+                     y = total_g, 
+                     color = species_name)) + # coloring by species 
+  # represent individuals in each species 
+geom_jitter(height = 0) +
+  # relabeling x- and y-axis and title 
+  labs(x = "Species Name", 
+       y = "Total leaf mass in g", 
+       title = "Species differ in plant mass") + 
+  # wrapping x-axis text
+  scale_x_discrete(labels = label_wrap(10)) +
+  # usuing customn colors 
+  scale_color_manual(values = c(
+    "Lotus scoparius" = lotsco_col, 
+    "Pentstemon centranthifolius" = pencen_col, 
+    "Salvia leucophylla" = salleu_col, 
+    "Encelia californica" = enccal_col, 
+    "Stipa pulchra" = stipul_col, 
+    "Eschscholzia californica" = esccal_col, 
+    "Grindelia camporum" = gricam_col)) + 
+  # taking out legend 
+  theme(legend.position = "none")
+```
 
 
 
