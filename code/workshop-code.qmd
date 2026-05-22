@@ -188,6 +188,8 @@ Add a title describing the differences in (mean or median) plant mass between wa
 
 ```{r}
 #| label: ggplot
+#| fig-height: 5
+#| fig-width: 6
 
 # base laser: ggplot
 ggplot(data = drought_exp_clean, 
@@ -228,6 +230,8 @@ Bonus: order the x-axis by decreasing mean plant mass.
 
 ```{r}
 #| label: jitter plot
+#| fig-height: 5
+#| fig-width: 7
 
 ggplot(data = drought_exp_clean, 
        mapping = aes(x = species_name, 
